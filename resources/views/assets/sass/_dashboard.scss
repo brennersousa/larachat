@@ -1,0 +1,195 @@
+.scroller {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dad7d7 #F4F4F4;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+.scroller::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+.scroller::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+
+
+.users-list{
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 350px;
+
+    >.user-list-header{
+        // display: flex;
+        background-color: #ededed;
+        align-content: space-between;
+        align-items: center;
+        min-width: 100px;
+    }
+    >.users{
+        cursor: pointer;
+        >div{
+            max-height: calc(100vh - 56px  - 1rem);
+            // overflow: auto;
+            // overflow-
+            
+            overflow-y: auto;
+            >li{
+                height: 50px;
+                display: flex;
+                align-content: flex-start;
+                align-items: center;
+                font-weight: bold;
+                font-size: 1em;
+                border-bottom: 1px solid #dad7d7;
+                padding-bottom: 35px;
+                padding-top: 35px;
+       
+               //  width: ;
+               }
+        }
+    }
+}
+
+#settings{
+    cursor: pointer;
+}
+
+.initial-dashboard{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 220px;
+    height: 100%;
+}
+
+.chat{
+    margin: 0 !important;
+    padding: 0 !important;
+    >.chat-background{
+        // background-color: #e5ddd5;
+        // background-color: #e5ddd585;
+        background-color: #e5ddd5ed;
+        height: 100vh;
+
+        >.chat-header{
+            border-left: 1px solid #dad7d7;
+            background-color: #ededed;
+            align-content: space-between;
+            align-items: center;
+            // min-width: 100px;
+        }
+
+        >.chat-body{
+            position: relative;
+    
+            >.chat-footer{
+                border-left: 1px solid #dad7d7;
+                background-color: #ededed;
+                align-content: space-between;
+                align-items: center;
+                position:fixed;
+                bottom:0;
+                width:100%;
+            }
+        }
+    }
+
+    .custom-textarea-content{
+        border-radius: 21px;
+        background-color: #fff;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+    
+    .custom-textarea{
+        width: calc(100vw - 450px);
+        max-height: 100px;
+        padding: 2px 11px 2px 11px;
+        margin: 5px 10px;
+        border: 1px solid #fff;
+        border-radius: 21px;
+        background-color: #fff;
+        outline: none;
+    }
+
+    .icon-send-message{
+        padding-left: 10px;
+        width: 45px;
+        height: 37px;
+        cursor: pointer;
+    }
+
+    .content-message-to{
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 40px;
+    }
+
+    .content-message-from{
+        display: flex;
+        justify-content: flex-start;
+        margin-right: 40px;
+    }
+
+    .message{
+        border-radius: 12px;
+        max-width: 600px;
+    }
+
+    .message-to{
+        display: flex;
+        background-color: #dcf8c6;
+        padding: 8px;
+        margin: 2px 10px 2px 10px;
+        width: fit-content;
+    }
+
+    .message-from{
+        display: flex;
+        background-color: #fff;
+        padding: 8px;
+        margin: 2px 10px 2px 10px;
+        width: fit-content;
+    }
+
+    .chat-content{
+        display: table-cell;
+        vertical-align: bottom;
+        height: calc(100vh - 133px);
+        width: calc(100vw - 350px);
+        position: absolute;
+    }
+
+    .message-hour{
+        font-size: 0.8em;
+        color: #999;
+        padding-top: 9px;
+        padding-left: 27px;
+        position: relative;
+        float: right;
+    }
+
+    .content-message-from + .content-message-to{
+        margin-top: 35px;
+    }
+
+    .content-message-to + .content-message-from{
+        margin-top: 35px;
+    }
+
+    // [contenteditable=true]:empty:not(:focus):before{
+    //     content:attr(title)
+    // }
+    [contenteditable=true]:empty:before{
+        content:attr(title);
+        color: #999;
+    }
+
+    .chat_load{
+        height: 100vh;
+        display: flex;
+    }
+
+}
