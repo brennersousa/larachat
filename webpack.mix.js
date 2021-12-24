@@ -34,6 +34,7 @@ mix.scripts([
 .scripts([
     'resources/views/assets/js/login.js'
 ], 'public/assets/js/login.js')
+.js('resources/views/assets/js/laravel-echo.js', 'public/assets/js')
 .copyDirectory('resources/views/assets/js/jquery-ui/jquery-ui', 'public/assets/js/jquery-ui')
 .copyDirectory('resources/views/assets/fonts', 'public/assets/fonts')
 .copyDirectory('resources/views/assets/images', 'public/assets/images')

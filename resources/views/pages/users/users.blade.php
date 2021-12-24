@@ -206,6 +206,29 @@
                     sendMessage();
                 }
         });
+
+        connectPrivateChannel();
+
+        function connectPrivateChannel(){
+                window.Echo.private('user.' + {{ auth()->user()->id }}).listen('.SendMessage', (response) => {
+                
+                console.log("############### executei via websocket ############");
+                console.log(response);
+
+                
+                let windowChat = $(".window-chat");
+                let userId = windowChat.find('.chat').first().attr('user');
+                if(response.message.from_user == userId){
+                    console.log("############ mostrar mensagem #############");
+                    let date =  new Date(response.message.created_at);
+                    showMessageFromUserInThechat(windowChat, response.message.message, date);
+                    scrollMessage();
+                    return;
+                }
+
+                
+            });
+        }
     });
 </script>
 @endsection

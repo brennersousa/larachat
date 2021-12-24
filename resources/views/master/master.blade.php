@@ -49,6 +49,7 @@
 
     <script src="{{ asset(mix('assets/js/vendor.js')) }}"></script>
     <script src="{{ asset(mix('assets/js/scripts.js')) }}"></script>
+    <script src="{{ asset(mix('assets/js/laravel-echo.js')) }}"></script>
     @hasSection('scripts')
         @yield('scripts')
     @endif

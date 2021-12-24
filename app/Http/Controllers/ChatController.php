@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Chat\SendMessage;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Response;
 
 class ChatController extends Controller
@@ -66,6 +68,8 @@ class ChatController extends Controller
                 'message' => $this->message->error("Ops, não foi possível enviar sua mensagem. Tente novamente mais tarde !")->render(),
             ]);
         }
+
+        Event::dispatch(new SendMessage($message));
 
         return Response::json([
             'success' => true,
