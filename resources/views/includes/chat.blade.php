@@ -14,7 +14,7 @@
             {{-- <div class="thumb-photo rounded-circle" style="background-image: url('{{ !empty($employee) ? $employee->getProfilePhoto() : asset('assets/admin/images/avatar-masculino.png') }}')"></div> --}}
         </div>
         <div class="chat-body">
-            <div class="chat-content px-5 scroller"></div>
+            <div class="chat-content px-5 scroller" id="chat-content"></div>
 
             <div class="chat-footer py-2 px-2 d-flex justify-content-between">
                 <div class="d-flex align-items-center align-content-lg-between">

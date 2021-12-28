@@ -31,20 +31,30 @@
 .users-list > .users {
   cursor: pointer;
 }
+.users-list > .users .hidden-notification {
+  display: none !important;
+}
+.users-list > .users .has-message {
+  background-color: #6cd91659;
+  width: 30px;
+  padding: 7px;
+  border-radius: 22px;
+  font-size: 0.7em;
+  text-align: center;
+}
 .users-list > .users > div {
   max-height: calc(100vh - 56px - 1rem);
   overflow-y: auto;
 }
 .users-list > .users > div > li {
-  height: 50px;
   display: flex;
   align-content: flex-start;
   align-items: center;
   font-weight: bold;
   font-size: 1em;
   border-bottom: 1px solid #dad7d7;
-  padding-bottom: 35px;
-  padding-top: 35px;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 #settings {
@@ -722,6 +732,7 @@
 .thumb-photo {
   width: 40px;
   height: 40px;
+  padding-right: 40px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

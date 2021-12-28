@@ -28,7 +28,9 @@ Route::name('chat.')->prefix('chat')->middleware(['auth'])->group(function () {
 
     Route::get('dashboard', [\App\Http\Controllers\ChatController::class, 'index'])->name('index');
     Route::get('chat/{user}', [\App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
+    Route::get('messages/{user}/{lastId}', [\App\Http\Controllers\ChatController::class, 'getMessages'])->name('getMessages');
     Route::post('message/{user}', [\App\Http\Controllers\ChatController::class, 'sendMessage'])->name('sendMessage');
+    Route::post('messages', [\App\Http\Controllers\ChatController::class, 'markMessagesAsRead'])->name('markMessagesAsRead');
 
 });
 

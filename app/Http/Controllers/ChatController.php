@@ -14,23 +14,22 @@ class ChatController extends Controller
 {
     public function index()
     {
+        $messagesNotRead = Message::selectRaw('from_user, count(*) as total')
+        ->where('to_user', '=', Auth::user()->id)
+        ->whereNull('receive_message')
+        ->groupBy('from_user')
+        ->pluck('total', 'from_user')->toArray();
+
         $users = User::all()->except(Auth::user()->id);
-        return view('pages.users.users', ['users' => $users]);
+        return view('pages.users.users', ['users' => $users, 'messagesNotRead' => $messagesNotRead]);
     }
 
     public function chat($id)
     {
         $user = User::find($id);
-        
-        $messages = Message::where(function($q) use ($user){
-            $q->where('from_user', '=', Auth::user()->id)
-            ->where('to_user', '=', $user->id);
-        })
-        ->orWhere(function($q) use ($user){
-            $q->where('from_user', '=', $user->id)
-            ->where('to_user', '=', Auth::user()->id);
-        })
-        ->orderBy('id', 'DESC')->limit(20)->get()->toArray();
+
+        $messages = (new Message())->getMessages($user)
+                        ->orderBy('id', 'DESC')->limit(20)->get()->toArray();
 
         usort($messages, function($messageA, $messageB){
             $dateOfMessageA = new \DateTime($messageA['created_at']);
@@ -75,5 +74,35 @@ class ChatController extends Controller
             'success' => true,
             'message' => $this->message->success("Sua mensagem foi enviada com sucesso")->render()
         ]);
+    }
+
+    public function markMessagesAsRead(Request $request)
+    {
+        $messsageIds = $request->messsageIds;
+        Message::whereIn('id', $messsageIds)->update(['receive_message' => date('Y-m-d H:i:s')]);
+
+        return Response::json([
+            'success' => true,
+            'message' => $this->message->success("As mensagens foram marcadas como lidas")->render()
+        ]);
+    }
+
+    public function getMessages($userId, $lastId)
+    {
+        $user = User::find($userId);
+        
+        $messages = (new Message())->getMessages($user)
+                        ->where('id', '<', $lastId)
+                        ->orderBy('id', 'DESC')->limit(20)->get()->toArray();
+
+
+        usort($messages, function($messageA, $messageB){
+            $dateOfMessageA = new \DateTime($messageA['created_at']);
+            $dateOfMessageB = new \DateTime($messageB['created_at']);
+
+            return $dateOfMessageA->getTimestamp() > $dateOfMessageB->getTimestamp() ? -1 : 1;
+        });
+
+        return Response::json(['messages' => $messages]);
     }
 }
