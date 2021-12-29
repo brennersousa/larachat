@@ -12,6 +12,7 @@
     {{-- <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/vendor.css')) }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset(mix('assets/js/jquery-ui/jquery-ui.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/emoji/emojionearea.css') }}">
     <link rel="stylesheet" href="{{ asset(mix('assets/css/style.css')) }}">
     @hasSection('css')
         @yield('css')
@@ -48,6 +49,7 @@
     </div>
 
     <script src="{{ asset(mix('assets/js/vendor.js')) }}"></script>
+    <script src="{{ asset('assets/fonts/emoji/emojionearea.js') }}"></script>
     <script src="{{ asset(mix('assets/js/scripts.js')) }}"></script>
     <script src="{{ asset(mix('assets/js/laravel-echo.js')) }}"></script>
     @hasSection('scripts')

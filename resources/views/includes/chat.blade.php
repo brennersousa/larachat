@@ -18,7 +18,7 @@
 
             <div class="chat-footer py-2 px-2 d-flex justify-content-between">
                 <div class="d-flex align-items-center align-content-lg-between">
-                    {{-- <textarea name="message" id="message" class="custom-textarea" rows="1"></textarea> --}}
+                    <div id="emoji" class="d-flex mx-3"></div>
                     <div class="custom-textarea-content">
                         <div contenteditable="true" id="message" class="scroller custom-textarea"
                             title="Digite uma mensagem"></div>

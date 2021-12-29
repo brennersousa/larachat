@@ -79,6 +79,31 @@
         $(function() {
 
             /**
+            * activate the button to select an emoji
+            * @version 1.0.0 - 20211229
+            * @author Brenner S. Barboza
+            * @return void
+            */
+            function activeEmoji(){
+                $('.window-chat').find("#emoji").emojioneArea({
+                    inline: true,
+                    pickerPosition: 'top',
+                    events: {
+                        emojibtn_click: function () {
+                            let actElem = $("#message");
+                            let value = actElem.html() + emojione.toImage(this.getText());
+                            // value = emojione.toShort(value);
+                            this.setText('');
+                            actElem.html(value);
+                        },
+                        keyup: function(){
+                            this.setText('');
+                        },
+                    }
+                });
+            }
+
+            /**
             * scroll message
             * @version 1.0.0 - 20211228
             * @author Brenner S. Barboza
@@ -183,8 +208,9 @@
                                 showMessageToUserInThechat(chatBase, message.message, date, false, message.id);
                             }
                         }
-                        $('.window-chat').html(chatBase.html());
+                        $('.window-chat').html(chatBase.html()).find("[contenteditable='true']").focus();
                         scrollMessage();
+                        activeEmoji();
                         loadMoreMessages();
                         markMessagesAsRead();
                     }
@@ -209,14 +235,16 @@
             * @return void
             */
             function sendMessage() {
-                let chat = $(".window-chat").find("[contenteditable='true']");
+                let chat = $(".window-chat").find("#message");
                 let userId = $(".window-chat").find('.chat').first().attr('user');
                 let url = "{{ route('chat.sendMessage', '__id__') }}".replace('__id__', userId);
                 let message = chat.text();
                 let windowChat = $(".window-chat");
-                if (message == '') {
+                if (message.trim() == '' && $(chat).find('.emojione').length == 0) {
                     return;
                 }
+
+                message = chat.html();
                 chat.text('');
                 showMessageToUserInThechat(windowChat, message, new Date());
                 let lastMessage = windowChat.find('.content-message-to').last();
@@ -253,7 +281,8 @@
                 messageFrom.find('.message-from').attr('data-id', objectMessage.id)
                     .attr('data-message-read', objectMessage.receive_message != null ? true : false)
                     .find('.message-hour').text(date.toLocaleString('pt-BR'))
-                    .parent().prepend(document.createTextNode(objectMessage.message));
+                    // .parent().prepend(document.createTextNode(objectMessage.message));
+                    .parent().prepend(objectMessage.message);
 
                 if (prepend) {
                     chatElement.find('.chat-content').prepend(messageFrom.html());
@@ -272,7 +301,8 @@
                 let messageTo = $('.message_to_base').first().clone();
                 messageTo.find('.message-to').attr('data-id', messageId)
                 messageTo.find('.message-hour').text(date.toLocaleString('pt-BR'))
-                    .parent().prepend(document.createTextNode(message));
+                    // .parent().prepend(document.createTextNode(message));
+                    .parent().prepend(message);
 
                 if (prepend) {
                     chatElement.find('.chat-content').prepend(messageTo.html());

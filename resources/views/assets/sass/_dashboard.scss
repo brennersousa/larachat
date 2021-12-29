@@ -118,7 +118,7 @@
     }
     
     .custom-textarea{
-        width: calc(100vw - 450px);
+        width: calc(100vw - 477px);
         max-height: 100px;
         padding: 2px 11px 2px 11px;
         margin: 5px 10px;
@@ -205,6 +205,24 @@
     .chat_load{
         height: 100vh;
         display: flex;
+    }
+
+    .emojionearea.emojionearea-inline{
+        border: none;
+        margin: 0 !important;
+    }
+
+    .emojione{
+        height: 2ex;
+        width: 2.1ex;
+        min-height: 20px;
+        min-width: 20px;
+        display: inline-block;
+        margin: -.2ex 0.15em .2ex;
+        line-height: normal;
+        vertical-align: middle;
+        max-width: 100%;
+        top: 0;
     }
 
 }
